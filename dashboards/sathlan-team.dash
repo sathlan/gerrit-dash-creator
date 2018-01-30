@@ -1,0 +1,25 @@
+[dashboard]
+title = My Team reviews
+foreach = NOT owner:self NOT reviewer:self NOT status:abandoned (owner:ccamacho@redhat.com OR owner:mat.bultel@gmail.com OR owner:mbultel@redhat.com OR owner:marios@redhat.com OR lbezdick@redhat.com OR owner:social@v3.sk OR lbezdick@redhat.com OR owner:mcornea@redhat.com OR owner:yprokule@redhat.com OR owner:rbartal@redhat.com  OR owner:augol@redhat.com OR owner:sgolovat@redhat.com)
+description = My team reviews
+
+[section "Backport"]
+query = message:"cherry picked from commit"  NOT status:merged
+
+[section "Negative review"]
+query = (label:Code-Review-1 OR label:Code-Review-2) NOT status:merged
+
+[section "Failed CI"]
+query = (label:Verified-1,zuul OR label:Verified-2,zuul) NOT (label:Code-Review-1 OR label:Code-Review-2) NOT status:merged
+
+[section "Work in Progress"]
+query = is:open label:Workflow<=-1 NOT status:merged
+
+[section "Waiting For Reviews"]
+query = is:open NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT label:Code-Review>=2  NOT status:merged
+
+[section "Waiting For Second Review"]
+query = is:open NOT label:Workflow>=1 NOT label:Code-Review<=-2 label:Code-Review>=2  NOT status:merged
+
+[section "Closed"]
+query = is:closed limit:20 status:merged
