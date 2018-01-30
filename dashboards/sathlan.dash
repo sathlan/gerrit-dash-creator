@@ -1,0 +1,34 @@
+[dashboard]
+title = My Dashboard
+foreach = NOT status:abandoned
+description = My review of primary interset
+
+[section "Backport"]
+query = message:"cherry picked from commit" (owner:self OR reviewer:self) NOT status:merged
+
+[section "Negative review"]
+query = owner:self (label:Code-Review-1 OR label:Code-Review-2) NOT status:merged
+
+[section "Failed CI"]
+query = owner:self (label:Verified-1,zuul OR label:Verified-2,zuul) NOT (label:Code-Review-1 OR label:Code-Review-2) NOT status:merged
+
+[section "Work in Progress"]
+query = owner:self is:open label:Workflow<=-1 NOT status:merged
+
+[section "Waiting For Reviews"]
+query = owner:self is:open NOT label:Workflow<=-1 NOT label:Verified<=-1 NOT label:Code-Review>=2 NOT status:merged
+
+[section "Waiting For Second Review"]
+query = owner:self is:open NOT label:Workflow>=1 NOT label:Code-Review<=-2 label:Code-Review>=2 NOT status:merged
+
+[section "Reviewing"]
+query = reviewer:self is:open NOT owner:self limit:20 NOT status:merged
+
+[section "Starred"]
+query = is:starred NOT reviewer:self NOT owner:self is:open NOT status:merged
+
+[section "My Closed"]
+query = owner:self is:closed limit:20 status:merged
+
+[section "Team Closed"]
+query = is:closed limit:20 status:merged (owner:ccamacho@redhat.com OR owner:mat.bultel@gmail.com OR owner:mbultel@redhat.com OR owner:marios@redhat.com OR lbezdick@redhat.com OR owner:social@v3.sk OR lbezdick@redhat.com OR owner:mcornea@redhat.com OR owner:yprokule@redhat.com OR owner:rbartal@redhat.com  OR owner:augol@redhat.com OR owner:sgolovat@redhat.com)
