@@ -31,4 +31,4 @@ query = is:starred NOT reviewer:self NOT owner:self is:open NOT status:merged
 query = owner:self is:closed limit:20 status:merged
 
 [section "Team Closed"]
-query = is:closed limit:20 status:merged (owner:ccamacho@redhat.com OR owner:mat.bultel@gmail.com OR owner:mbultel@redhat.com OR owner:marios@redhat.com OR lbezdick@redhat.com OR owner:social@v3.sk OR lbezdick@redhat.com OR owner:mcornea@redhat.com OR owner:yprokule@redhat.com OR owner:rbartal@redhat.com  OR owner:augol@redhat.com OR owner:sgolovat@redhat.com)
+query = is:closed limit:20 status:merged (owner:ccamacho@redhat.com OR owner:mat.bultel@gmail.com OR owner:mbultel@redhat.com OR owner:marios@redhat.com OR owner:social@v3.sk OR lbezdick@redhat.com OR owner:mcornea@redhat.com OR owner:yprokule@redhat.com OR owner:rbartal@redhat.com  OR owner:augol@redhat.com OR owner:sgolovat@redhat.com)
